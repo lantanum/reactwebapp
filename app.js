@@ -56,6 +56,7 @@ document.addEventListener('DOMContentLoaded', function () {
         sortedRows.forEach(row => table.appendChild(row));
     });
 
+    // Example using click and mouseover events
     const button = document.getElementById('example-button');
     button.addEventListener('click', function () {
         alert('Button clicked!');
@@ -80,6 +81,7 @@ document.addEventListener('DOMContentLoaded', function () {
     table.addEventListener('mouseover', cellHoverHandler);
     table.addEventListener('mouseout', cellMouseOutHandler);
 
+    // Example using keyboard events
     document.addEventListener('keydown', function (event) {
         if (event.key === 'Enter') {
             alert('Enter key pressed!');
