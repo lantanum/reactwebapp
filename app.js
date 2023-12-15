@@ -56,26 +56,19 @@ document.addEventListener('DOMContentLoaded', function () {
         sortedRows.forEach(row => table.appendChild(row));
     });
 
-    document.addEventListener('keydown', function (event) {
-        if (event.key === 'Escape') {
-            filterInput.value = ''; // Clear filter input on 'Escape' key press
-            Array.from(table.rows).forEach(row => row.style.display = '');
-        }
+    const cellsArray = Array.from(table.rows[0].cells);
+    
+    cellsArray.forEach(cell => {
+        cell.style.color = 'blue';
     });
 
-    table.addEventListener('mouseover', function (event) {
-        const target = event.target;
+    const cellTextArray = cellsArray.map(cell => cell.textContent);
 
-        if (target.tagName === 'TD') {
-            target.style.backgroundColor = 'lightgray';
-        }
-    });
+    const emailCells = cellsArray.filter(cell => cell.textContent.includes('Email'));
 
-    table.addEventListener('mouseout', function (event) {
-        const target = event.target;
+    const concatenatedText = cellsArray.reduce((accumulator, cell) => accumulator + cell.textContent, '');
 
-        if (target.tagName === 'TD') {
-            target.style.backgroundColor = '';
-        }
-    });
+    console.log(cellTextArray);
+    console.log(emailCells);
+    console.log(concatenatedText);
 });
