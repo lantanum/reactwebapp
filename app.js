@@ -56,20 +56,33 @@ document.addEventListener('DOMContentLoaded', function () {
         sortedRows.forEach(row => table.appendChild(row));
     });
 
-    // Example using spread operator with array literals
-    const numbers = [1, 2, 3, 4, 5];
-    const newNumbers = [...numbers, 6, 7, 8];
-    console.log(newNumbers); // [1, 2, 3, 4, 5, 6, 7, 8]
+    const button = document.getElementById('example-button');
+    button.addEventListener('click', function () {
+        alert('Button clicked!');
+    });
 
-    // Example using spread operator with objects
-    const person = { name: 'John', age: 30 };
-    const newPerson = { ...person, gender: 'Male' };
-    console.log(newPerson); // { name: 'John', age: 30, gender: 'Male' }
+    const cellHoverHandler = function (event) {
+        const target = event.target;
 
-    // Example using rest parameters
-    function sum(...numbers) {
-        return numbers.reduce((total, num) => total + num, 0);
-    }
+        if (target.tagName === 'TD') {
+            target.style.backgroundColor = 'lightgray';
+        }
+    };
 
-    console.log(sum(1, 2, 3, 4, 5)); // 15
+    const cellMouseOutHandler = function (event) {
+        const target = event.target;
+
+        if (target.tagName === 'TD') {
+            target.style.backgroundColor = '';
+        }
+    };
+
+    table.addEventListener('mouseover', cellHoverHandler);
+    table.addEventListener('mouseout', cellMouseOutHandler);
+
+    document.addEventListener('keydown', function (event) {
+        if (event.key === 'Enter') {
+            alert('Enter key pressed!');
+        }
+    });
 });
