@@ -1,5 +1,8 @@
 document.addEventListener('DOMContentLoaded', function () {
     const form = document.getElementById('example-form');
+    const table = document.querySelector('table tbody');
+    const filterInput = document.getElementById('filter-input');
+    const sortSelect = document.getElementById('sort-select');
 
     form.addEventListener('submit', function (event) {
         event.preventDefault();
@@ -10,7 +13,6 @@ document.addEventListener('DOMContentLoaded', function () {
         const subscribe = document.getElementById('subscribe').checked ? 'Yes' : 'No';
         const country = document.getElementById('country').value;
 
-        const table = document.querySelector('table tbody');
         const newRow = table.insertRow(table.rows.length);
         const cells = [name, email, gender, subscribe, country];
 
@@ -22,8 +24,6 @@ document.addEventListener('DOMContentLoaded', function () {
         form.reset();
     });
 
-    const table = document.querySelector('table tbody');
-
     table.addEventListener('click', function (event) {
         const target = event.target;
 
@@ -31,8 +31,6 @@ document.addEventListener('DOMContentLoaded', function () {
             alert(`Clicked on cell: ${target.textContent}`);
         }
     });
-
-    const filterInput = document.getElementById('filter-input');
 
     filterInput.addEventListener('input', function () {
         const filterValue = filterInput.value.toLowerCase();
@@ -42,8 +40,6 @@ document.addEventListener('DOMContentLoaded', function () {
             row.style.display = textContent.includes(filterValue) ? '' : 'none';
         });
     });
-
-    const sortSelect = document.getElementById('sort-select');
 
     sortSelect.addEventListener('change', function () {
         const columnIndex = sortSelect.selectedIndex;
@@ -56,7 +52,30 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
         table.innerHTML = '';
-        table.appendChild(rowsArray[0]); 
+        table.appendChild(rowsArray[0]);
         sortedRows.forEach(row => table.appendChild(row));
+    });
+
+    document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape') {
+            filterInput.value = ''; // Clear filter input on 'Escape' key press
+            Array.from(table.rows).forEach(row => row.style.display = '');
+        }
+    });
+
+    table.addEventListener('mouseover', function (event) {
+        const target = event.target;
+
+        if (target.tagName === 'TD') {
+            target.style.backgroundColor = 'lightgray';
+        }
+    });
+
+    table.addEventListener('mouseout', function (event) {
+        const target = event.target;
+
+        if (target.tagName === 'TD') {
+            target.style.backgroundColor = '';
+        }
     });
 });
