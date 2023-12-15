@@ -56,19 +56,20 @@ document.addEventListener('DOMContentLoaded', function () {
         sortedRows.forEach(row => table.appendChild(row));
     });
 
-    const cellsArray = Array.from(table.rows[0].cells);
-    
-    cellsArray.forEach(cell => {
-        cell.style.color = 'blue';
-    });
+    // Example using spread operator with array literals
+    const numbers = [1, 2, 3, 4, 5];
+    const newNumbers = [...numbers, 6, 7, 8];
+    console.log(newNumbers); // [1, 2, 3, 4, 5, 6, 7, 8]
 
-    const cellTextArray = cellsArray.map(cell => cell.textContent);
+    // Example using spread operator with objects
+    const person = { name: 'John', age: 30 };
+    const newPerson = { ...person, gender: 'Male' };
+    console.log(newPerson); // { name: 'John', age: 30, gender: 'Male' }
 
-    const emailCells = cellsArray.filter(cell => cell.textContent.includes('Email'));
+    // Example using rest parameters
+    function sum(...numbers) {
+        return numbers.reduce((total, num) => total + num, 0);
+    }
 
-    const concatenatedText = cellsArray.reduce((accumulator, cell) => accumulator + cell.textContent, '');
-
-    console.log(cellTextArray);
-    console.log(emailCells);
-    console.log(concatenatedText);
+    console.log(sum(1, 2, 3, 4, 5)); // 15
 });
